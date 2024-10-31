@@ -1,3 +1,4 @@
+using ELibrary.Application.Features.CQRS.Handlers.ApplicationUserCommandHandlers;
 using ELibrary.Domain.Entities;
 using ELibrary.Persistence.Context;
 using Microsoft.AspNetCore.Identity;
@@ -12,11 +13,14 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ELibraryContext>(options =>
     options.UseNpgsql(connectionString));
 
-builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
-    .AddEntityFrameworkStores<ELibraryContext>().AddDefaultTokenProviders();
+//builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
+//    .AddEntityFrameworkStores<ELibraryContext>().AddDefaultTokenProviders();
+
+builder.Services.AddIdentity<ApplicationUser,ApplicationRole>().AddEntityFrameworkStores<ELibraryContext>();
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<ApplicationUserRegisterCommandHandler>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -32,7 +36,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapIdentityApi<ApplicationUser>();
+//app.MapIdentityApi<ApplicationUser>();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

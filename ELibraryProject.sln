@@ -9,13 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{C8E20EB0-D1AB-48B7-A778-B336D947FD51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELibrary.Application", "Core\ELibrary.Application\ELibrary.Application.csproj", "{10BC1483-4AE9-4C66-89F0-B0EE399B0A6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ELibrary.Application", "Core\ELibrary.Application\ELibrary.Application.csproj", "{10BC1483-4AE9-4C66-89F0-B0EE399B0A6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELibrary.Domain", "Core\ELibrary.Domain\ELibrary.Domain.csproj", "{9A8C6E9A-404F-4F51-9EED-CF9BBDE6CEFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ELibrary.Domain", "Core\ELibrary.Domain\ELibrary.Domain.csproj", "{9A8C6E9A-404F-4F51-9EED-CF9BBDE6CEFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELibrary.Persistence", "Infrastructure\ELibrary.Persistence\ELibrary.Persistence.csproj", "{386D71CC-5F67-4D1B-9F92-9C8368ED5A57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ELibrary.Persistence", "Infrastructure\ELibrary.Persistence\ELibrary.Persistence.csproj", "{386D71CC-5F67-4D1B-9F92-9C8368ED5A57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELibrary.WebApi", "Presentation\ELibrary.WebApi\ELibrary.WebApi.csproj", "{2B9C9536-25DB-4F39-AADF-18FC5ECF5030}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ELibrary.WebApi", "Presentation\ELibrary.WebApi\ELibrary.WebApi.csproj", "{2B9C9536-25DB-4F39-AADF-18FC5ECF5030}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELibrary.WebUI", "Presentation\ELibrary.WebUI\ELibrary.WebUI.csproj", "{10F4A612-2E19-4A61-9E97-499C80CEB629}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{2B9C9536-25DB-4F39-AADF-18FC5ECF5030}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B9C9536-25DB-4F39-AADF-18FC5ECF5030}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B9C9536-25DB-4F39-AADF-18FC5ECF5030}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10F4A612-2E19-4A61-9E97-499C80CEB629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10F4A612-2E19-4A61-9E97-499C80CEB629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10F4A612-2E19-4A61-9E97-499C80CEB629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10F4A612-2E19-4A61-9E97-499C80CEB629}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{9A8C6E9A-404F-4F51-9EED-CF9BBDE6CEFE} = {DB206E99-EE7F-4C91-B0D9-67EF07F72303}
 		{386D71CC-5F67-4D1B-9F92-9C8368ED5A57} = {C2DC60C8-CDBF-4BF3-B885-0C7CA517E0A3}
 		{2B9C9536-25DB-4F39-AADF-18FC5ECF5030} = {C8E20EB0-D1AB-48B7-A778-B336D947FD51}
+		{10F4A612-2E19-4A61-9E97-499C80CEB629} = {C8E20EB0-D1AB-48B7-A778-B336D947FD51}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CA7219C4-9BAB-43A9-B606-A54076067565}

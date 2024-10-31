@@ -132,3 +132,8 @@ C:\Users\sulen\Desktop\ELibraryProject\E-Library-Project\Presentation\ELibrary.W
 C:\Users\sulen\Desktop\ELibraryProject\E-Library-Project\Presentation\ELibrary.WebApi\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\sulen\Desktop\ELibraryProject\E-Library-Project\Presentation\ELibrary.WebApi\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\sulen\Desktop\ELibraryProject\E-Library-Project\Presentation\ELibrary.WebApi\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\sulen\Desktop\ELibraryProject\E-Library-Project\Presentation\ELibrary.WebApi\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\sulen\Desktop\ELibraryProject\E-Library-Project\Presentation\ELibrary.WebApi\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\sulen\Desktop\ELibraryProject\E-Library-Project\Presentation\ELibrary.WebApi\bin\Debug\net8.0\FluentValidation.dll
+C:\Users\sulen\Desktop\ELibraryProject\E-Library-Project\Presentation\ELibrary.WebApi\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
+C:\Users\sulen\Desktop\ELibraryProject\E-Library-Project\Presentation\ELibrary.WebApi\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
