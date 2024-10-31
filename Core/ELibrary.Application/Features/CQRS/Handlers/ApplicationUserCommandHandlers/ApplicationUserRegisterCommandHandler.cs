@@ -26,11 +26,7 @@ namespace ELibrary.Application.Features.CQRS.Handlers.ApplicationUserCommandHand
                 Email = command.Email,
                 FirstName = command.FirstName,
                 LastName = command.LastName,
-                City = command.City,
-                DateOfBirth = command.DateOfBirth,
-                ImageUrl = command.ImageUrl,
                 Gender = command.Gender,
-                District = command.District,
                 IsActive = true
             };
 

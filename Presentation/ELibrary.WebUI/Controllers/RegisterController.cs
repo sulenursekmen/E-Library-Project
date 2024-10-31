@@ -1,4 +1,5 @@
 ﻿using ELibrary.Application.Features.CQRS.Commands.ApplicationUserCommands;
+using ELibrary.Application.ValidationRules.ApplicationUserValidationRules;
 using ELibrary.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,18 @@ namespace ELibrary.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(ApplicationUserRegisterCommand model)
         {
+            var validator = new ApplicationUserRegisterValidator();
+
+            var validationResult = await validator.ValidateAsync(model);
+
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 ApplicationUser applicationUser = new ApplicationUser()
@@ -31,11 +44,7 @@ namespace ELibrary.WebUI.Controllers
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    City = model.City,
-                    District = model.District,
-                    DateOfBirth = DateTime.SpecifyKind(model.DateOfBirth, DateTimeKind.Utc),
-                    Gender = model.Gender,
-                    ImageUrl = model.ImageUrl
+                    Gender = model.Gender
                 };
 
                 var result = await _userManager.CreateAsync(applicationUser, model.Password);
@@ -43,8 +52,16 @@ namespace ELibrary.WebUI.Controllers
                 {
                     return RedirectToAction("Index", "ConfirmMail");
                 }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
             }
-            return View();
+
+            return View(model);
         }
     }
 }

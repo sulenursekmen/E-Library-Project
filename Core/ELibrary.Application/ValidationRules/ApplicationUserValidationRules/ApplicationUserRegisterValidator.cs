@@ -13,11 +13,11 @@ namespace ELibrary.Application.ValidationRules.ApplicationUserValidationRules
         public ApplicationUserRegisterValidator()
         {
             RuleFor(x => x.FirstName)
-                .NotEmpty().WithMessage("İsim alanı boş bırakılamaz")
+                .NotEmpty().WithMessage("Adı alanı boş bırakılamaz")
                 .Length(2, 50).WithMessage("İsim 2 ile 50 karakter arasında olmalıdır");
 
             RuleFor(x => x.LastName)
-                .NotEmpty().WithMessage("Soyisim alanı boş bırakılamaz")
+                .NotEmpty().WithMessage("Soyadı alanı boş bırakılamaz")
                 .Length(2, 50).WithMessage("Soyisim 2 ile 50 karakter arasında olmalıdır");
 
             RuleFor(x => x.Email)
@@ -37,19 +37,8 @@ namespace ELibrary.Application.ValidationRules.ApplicationUserValidationRules
                 .Matches("[^a-zA-Z0-9]").WithMessage("Şifre en az bir özel karakter içermelidir");
 
             RuleFor(x => x.ConfirmPassword)
-                .NotEmpty().WithMessage("Şifre onayı boş bırakılamaz")
+                .NotEmpty().WithMessage("Şifre tekrarı boş bırakılamaz")
                 .Equal(x => x.Password).WithMessage("Şifreler eşleşmiyor");
-
-            RuleFor(x => x.City)
-                .NotEmpty().WithMessage("Şehir alanı boş bırakılamaz")
-                .Length(2, 50).WithMessage("Şehir adı 2 ile 50 karakter arasında olmalıdır");
-
-            RuleFor(x => x.DateOfBirth)
-                .NotEmpty().WithMessage("Doğum tarihi boş bırakılamaz")
-                .Must(BeAValidAge).WithMessage("Geçerli bir yaş giriniz");
-
-            RuleFor(x => x.ImageUrl)
-                .Must(BeAValidUrl).WithMessage("Geçerli bir URL giriniz").When(x => !string.IsNullOrEmpty(x.ImageUrl));
 
             RuleFor(x => x.Gender)
                 .NotEmpty().WithMessage("Cinsiyet alanı boş bırakılamaz")
@@ -57,17 +46,7 @@ namespace ELibrary.Application.ValidationRules.ApplicationUserValidationRules
                 .WithMessage("Cinsiyet 'Male', 'Female' veya 'Other' olmalıdır");
         }
 
-        private bool BeAValidAge(DateTime date)
-        {
-            int age = DateTime.Today.Year - date.Year;
-            if (date > DateTime.Today.AddYears(-age)) age--;
-            return age >= 6;
-        }
-
-        private bool BeAValidUrl(string url)
-        {
-            return Uri.TryCreate(url, UriKind.Absolute, out _);
-        }
+      
     }
 
 }

@@ -4,67 +4,83 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Kayıt Ol</h2>
+<section class="page-section text-white d-flex justify-content-center mt-5">
+    <div class="card shadow-lg p-4 custom-card-bg" style="background-color: #343a40;">
+        <h2 class="mb-4 text-center text-white">Kayıt Ol</h2>
+        <form id="registrationForm" method="post" asp-action="Index">
+            <div class="mb-3">
+                <label>Kullanıcı Adı</label>
+                <input asp-for="Username" class="form-control" placeholder="Kullanıcı adınızı giriniz" required />
+                <div class="invalid-feedback">Kullanıcı adınızı girmeniz gerekmektedir.</div>
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
 
-<form asp-action="Index" method="post">
-    <div>
-        <label>Kullanıcı Adı</label>
-        <input asp-for="Username" class="form-control" />
-        <span asp-validation-for="Username" class="text-danger"></span>
+            <div class="mb-3">
+                <label>Email</label>
+                <input asp-for="Email" type="email" class="form-control" placeholder="Email adresinizi giriniz" required />
+                <div class="invalid-feedback">Geçerli bir email adresi giriniz.</div>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Adı</label>
+                <input asp-for="FirstName" class="form-control" placeholder="Adınızı giriniz" required />
+                <div class="invalid-feedback">Adınızı girmeniz gerekmektedir.</div>
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Soyadı</label>
+                <input asp-for="LastName" class="form-control" placeholder="Soyadınızı giriniz" required />
+                <div class="invalid-feedback">Soyadınızı girmeniz gerekmektedir.</div>
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label>Şifre</label>
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Şifrenizi giriniz" required />
+                    <div class="invalid-feedback">Şifre girmeniz gerekmektedir.</div>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label>Şifre Tekrar</label>
+                    <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Şifrenizi tekrar giriniz" required />
+                    <div class="invalid-feedback">Şifreler eşleşmiyor.</div>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label>Cinsiyet</label>
+                <select asp-for="Gender" class="form-select" required>
+                    <option value="">Seçiniz</option>
+                    <option value="Male">Erkek</option>
+                    <option value="Female">Kadın</option>
+                    <option value="Other">Diğer</option>
+                </select>
+                <div class="invalid-feedback">Cinsiyet seçmeniz gerekmektedir.</div>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-dark mt-3 w-100">Kayıt Ol</button>
+        </form>
     </div>
-    <div>
-        <label>Email</label>
-        <input asp-for="Email" type="email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <div>
-        <label>Ad</label>
-        <input asp-for="FirstName" class="form-control" />
-        <span asp-validation-for="FirstName" class="text-danger"></span>
-    </div>
-    <div>
-        <label>Soyad</label>
-        <input asp-for="LastName" class="form-control" />
-        <span asp-validation-for="LastName" class="text-danger"></span>
-    </div>
-    <div>
-        <label>Şifre</label>
-        <input asp-for="Password" type="password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-    <div>
-        <label>Şifre Tekrar</label>
-        <input asp-for="ConfirmPassword" type="password" class="form-control" />
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-    </div>
-    <div>
-        <label>Şehir</label>
-        <input asp-for="City" class="form-control" />
-        <span asp-validation-for="City" class="text-danger"></span>
-    </div>
-    <div>
-        <label>İlçe</label>
-        <input asp-for="District" class="form-control" />
-        <span asp-validation-for="District" class="text-danger"></span>
-    </div>
-    <div>
-        <label>Doğum Tarihi</label>
-        <input asp-for="DateOfBirth" type="date" class="form-control" />
-        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-    </div>
-    <div>
-        <label>Profil Resmi URL</label>
-        <input asp-for="ImageUrl" class="form-control" />
-        <span asp-validation-for="ImageUrl" class="text-danger"></span>
-    </div>
-    <div>
-        <label>Cinsiyet</label>
-        <select asp-for="Gender" class="form-control">
-            <option value="Male">Erkek</option>
-            <option value="Female">Kadın</option>
-            <option value="Other">Diğer</option>
-        </select>
-        <span asp-validation-for="Gender" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary mt-3">Kayıt Ol</button>
-</form>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            $("#registrationForm").on("submit", function (e) {
+                let isValid = this.checkValidity();
+                if (!isValid) {
+                    e.preventDefault(); // Formu engelle
+                    $(this).addClass('was-validated'); // Geçerli form alanlarını vurgula
+                }
+            });
+        });
+    </script>
+}
