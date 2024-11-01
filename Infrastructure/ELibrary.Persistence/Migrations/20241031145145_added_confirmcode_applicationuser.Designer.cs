@@ -3,6 +3,7 @@ using System;
 using ELibrary.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ELibrary.Persistence.Migrations
 {
     [DbContext(typeof(ELibraryContext))]
-    partial class ELibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20241031145145_added_confirmcode_applicationuser")]
+    partial class added_confirmcode_applicationuser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,6 +70,7 @@ namespace ELibrary.Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ConfirmCode")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Email")

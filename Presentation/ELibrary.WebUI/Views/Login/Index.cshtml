@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="page-section text-white mt-5">
+    <div class="container">
+        <div class="custom-card card p-5 mx-auto" style="max-width: 500px;">
+            <!-- Max width added -->
+            <h2 class="text-center">Giriş Yap</h2>
+
+            <form asp-action="Index" method="post" class="mt-4">
+
+                <div class="form-group mb-3">
+                    <label for="Email" class="form-label">E-Posta</label>
+                    <input type="email" class="form-control" id="Email" name="Email" placeholder="E-posta adresinizi giriniz" required />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="Password" class="form-label">Şifre</label>
+                    <input type="password" class="form-control" id="Password" name="Password" placeholder="Şifrenizi giriniz" required />
+                </div>
+
+                <div class="form-group form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="RememberMe" name="RememberMe" />
+                    <label class="form-check-label" for="RememberMe">Beni Hatırla</label>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">Giriş Yap</button>
+
+                <div class="text-center mt-3">
+                    <a class="hover-link" asp-controller="Account" asp-action="ForgotPassword">Şifremi Unuttum</a> |
+                    <a class="hover-link" asp-controller="Register" asp-action="Index">Kayıt Ol</a>
+                </div>
+
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-danger mt-3">
+                        <ul>
+                            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                            {
+                                <li>@error.ErrorMessage</li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </form>
+        </div>
+    </div>
+</section>

@@ -1,69 +1,20 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - E-Kütüphane</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Elibrary.WebUI.styles.css" asp-append-version="true" />
-</head>
+@await Component.InvokeAsync("_HeadLayoutComponentPartial")
 <body class="bg-dark">
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark custom-box-shadow mb-3 p-3">
 
-            <div class="container">
-                <a class="navbar-brand fw-bold" asp-area="" asp-controller="Home" asp-action="Index">E-Kütüphane</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <!-- left -->
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item mx-2">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Books" asp-action="Categories">Kitap Kategorileri</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Books" asp-action="Popular">Popüler Kitaplar</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Books" asp-action="NewArrivals">Yeni Eklenenler</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Profile">Profilim</a>
-                        </li>
-                    </ul>
-                    <!-- right -->
-                    <ul class="navbar-nav">
-                        <li class="nav-item mx-2">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">Giriş Yap</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Kayıt Ol</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    @await Component.InvokeAsync("_HeaderLayoutComponentPartial")
+    @await Component.InvokeAsync("_LogoutModalLayoutComponentPartial")
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; @DateTime.Now.Year - E-Kütüphane - <a asp-area="" asp-controller="Home" asp-action="Privacy">Gizlilik</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await Component.InvokeAsync("_FooterLayoutComponentPartial")
+    @await Component.InvokeAsync("_ScriptLayoutComponentPartial")
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -1,5 +1,7 @@
 using ELibrary.Domain.Entities;
 using ELibrary.Persistence.Context;
+using ELibrary.WebUI.Models;
+using ELibrary.WebUI.Services.EmailServices;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +18,10 @@ builder.Services.AddDbContext<ELibraryContext>(options =>
     options.UseNpgsql(connectionString));
 
 builder.Services.AddDbContext<ELibraryContext>();
-builder.Services.AddIdentity<ApplicationUser,ApplicationRole>().AddEntityFrameworkStores<ELibraryContext>();
+builder.Services.AddIdentity<ApplicationUser,ApplicationRole>().AddEntityFrameworkStores<ELibraryContext>().AddErrorDescriber<CustomIdentityValidator>();
+
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

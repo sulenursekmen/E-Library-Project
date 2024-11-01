@@ -1,0 +1,58 @@
+﻿<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark custom-box-shadow mb-3 p-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold" asp-area="" asp-controller="Home" asp-action="Index">E-Kütüphane</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <!-- left -->
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-light hover-link" asp-area="" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-light hover-link" asp-area="" asp-controller="Books" asp-action="Categories">Kitap Kategorileri</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-light hover-link" asp-area="" asp-controller="Books" asp-action="Popular">Popüler Kitaplar</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-light hover-link" asp-area="" asp-controller="Books" asp-action="NewArrivals">Yeni Eklenenler</a>
+                    </li>
+                </ul>
+                <!-- right -->
+                <ul class="navbar-nav">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item dropdown mx-2">
+                            <a class="nav-link dropdown-toggle text-light " href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                @User.Identity.Name
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Profile" asp-action="Index">Profilim</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item text-dark" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                                        Çıkış Yap
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-light hover-link" href="/Login/Index/">Giriş Yap</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-light hover-link" href="/Register/Index/">Kayıt Ol</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,23 @@
+﻿@model ConfirmMailViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container p-3 text-white">
+    <form method="post">
+        <label>Gönderilen E-Mail Adresi : @ViewBag.v </label>
+        <br />
+
+        <label class="mb-3 fw-bold">Mail adresinize gelen 6 haneli kod :</label>
+        <div class="row">
+            <div class="col-3">
+                <input type="text" class="form-control" placeholder="XXXXXX" asp-for="ConfirmCode" />
+                <span asp-validation-for="ConfirmCode" class="text-danger"></span>
+            </div>
+            <div class="col-1">
+                <button type="submit" class="btn btn-success">Onayla</button>
+            </div>
+        </div>
+    </form>
+</div>
