@@ -14,5 +14,7 @@ namespace ELibrary.Domain.Entities
         public string Gender { get; set; }
         public string? ConfirmCode { get; set; }
         public bool? IsActive { get; set; }
+        public string? ProfilePictureUrl { get; set; }
+        public string? Bio { get; set; }
     }
 }

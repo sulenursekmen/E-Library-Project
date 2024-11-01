@@ -48,7 +48,6 @@ namespace ELibrary.WebUI.Controllers
             {
                 user.EmailConfirmed = true;
                 await _userManager.UpdateAsync(user);
-                // Ana sayfaya yönlendiriyoruz
                 return RedirectToAction("Index", "Login");
             }
             else
