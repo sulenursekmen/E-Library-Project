@@ -16,5 +16,6 @@ namespace ELibrary.Domain.Entities
         public bool? IsActive { get; set; }
         public string? ProfilePictureUrl { get; set; }
         public string? Bio { get; set; }
+        public ICollection<Book> Books { get; set; } = new List<Book>();
     }
 }

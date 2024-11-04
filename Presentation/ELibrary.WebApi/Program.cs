@@ -1,8 +1,13 @@
 using ELibrary.Application.Features.CQRS.Handlers.ApplicationUserCommandHandlers;
+using ELibrary.Application.Features.Mediator.Commands.AuthorCommands;
+using ELibrary.Application.Interfaces;
+using ELibrary.Application.Mapping;
 using ELibrary.Domain.Entities;
 using ELibrary.Persistence.Context;
-using Microsoft.AspNetCore.Identity;
+using ELibrary.Persistence.Repositories;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +27,19 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ApplicationUserRegisterCommandHandler>();
 
+builder.Services.AddAutoMapper(typeof(GeneralMapping));
+
+
+
+
+
+//Author
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+builder.Services.AddMediatR(typeof(CreateAuthorCommand).Assembly);
+builder.Services.AddAutoMapper(typeof(Program));
+
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

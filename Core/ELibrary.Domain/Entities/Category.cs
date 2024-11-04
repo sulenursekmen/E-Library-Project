@@ -10,6 +10,7 @@ namespace ELibrary.Domain.Entities
     {
         public int CategoryId { get; set; } 
         public string CategoryName { get; set; }
-        public string ImageUrl { get; set; } 
+        public string Description { get; set; }
+        public ICollection<Book> Books { get; set; }
     }
 }
