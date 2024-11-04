@@ -1,5 +1,6 @@
 using ELibrary.Application.Features.CQRS.Handlers.ApplicationUserCommandHandlers;
 using ELibrary.Application.Features.Mediator.Commands.AuthorCommands;
+using ELibrary.Application.Features.Mediator.Commands.BookCommands;
 using ELibrary.Application.Interfaces;
 using ELibrary.Application.Mapping;
 using ELibrary.Domain.Entities;
@@ -10,8 +11,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
-
-
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -29,14 +28,13 @@ builder.Services.AddScoped<ApplicationUserRegisterCommandHandler>();
 
 builder.Services.AddAutoMapper(typeof(GeneralMapping));
 
-
-
-
-
 //Author
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddMediatR(typeof(CreateAuthorCommand).Assembly);
+
+builder.Services.AddMediatR(typeof(CreateBookCommand).Assembly);
+
 builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddControllers();
