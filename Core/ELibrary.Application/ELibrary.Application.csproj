@@ -22,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\CQRS\Queries\CategoryQueries\" />
-    <Folder Include="Features\CQRS\Results\CategoryResults\" />
+    <Folder Include="Features\CQRS\Queries\" />
+    <Folder Include="Features\CQRS\Results\" />
     <Folder Include="Services\" />
     <Folder Include="ValidationRules\ApplicationRoleValidationRules\" />
   </ItemGroup>

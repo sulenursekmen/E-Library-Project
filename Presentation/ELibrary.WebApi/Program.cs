@@ -1,6 +1,7 @@
 using ELibrary.Application.Features.CQRS.Handlers.ApplicationUserCommandHandlers;
 using ELibrary.Application.Features.Mediator.Commands.AuthorCommands;
 using ELibrary.Application.Features.Mediator.Commands.BookCommands;
+using ELibrary.Application.Features.Mediator.Commands.CategoryCommands;
 using ELibrary.Application.Interfaces;
 using ELibrary.Application.Mapping;
 using ELibrary.Domain.Entities;
@@ -34,6 +35,8 @@ builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddMediatR(typeof(CreateAuthorCommand).Assembly);
 
 builder.Services.AddMediatR(typeof(CreateBookCommand).Assembly);
+
+builder.Services.AddMediatR(typeof(CreateCategoryCommand).Assembly);
 
 builder.Services.AddAutoMapper(typeof(Program));
 

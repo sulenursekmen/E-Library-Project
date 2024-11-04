@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
-using ELibrary.Application.Features.CQRS.Commands.CategoryCommands;
 using ELibrary.Application.Features.Mediator.Commands.AuthorCommands;
 using ELibrary.Application.Features.Mediator.Commands.BookCommands;
+using ELibrary.Application.Features.Mediator.Commands.CategoryCommands;
 using ELibrary.Application.Features.Mediator.Results.AuthorResults;
 using ELibrary.Application.Features.Mediator.Results.BookResults;
+using ELibrary.Application.Features.Mediator.Results.CategoryResults;
 using ELibrary.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ namespace ELibrary.Application.Mapping
             //Category Mapping
             CreateMap<Category,CreateCategoryCommand>().ReverseMap();
             CreateMap<Category,UpdateCategoryCommand>().ReverseMap();
+            CreateMap<Category,GetCategoryByIdQueryResult>().ReverseMap();
+            CreateMap<Category,GetCategoryQueryResult>().ReverseMap();
 
             //Author Mapping
             CreateMap<Author, CreateAuthorCommand>().ReverseMap();
