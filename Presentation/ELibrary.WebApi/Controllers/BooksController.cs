@@ -30,6 +30,18 @@ namespace ELibrary.WebApi.Controllers
             var values = await _mediator.Send(new GetBookByIdQuery(id));
             return Ok(values);
         }
+        [HttpGet("category/{categoryId}/author/{authorId}")]
+        public async Task<IActionResult> GetBooksByCategoryAndAuthor(int categoryId, int authorId)
+        {
+            var query = new GetBooksByCategoryIdAndAuthorIdQuery
+            {
+                CategoryId = categoryId,
+                AuthorId = authorId
+            };
+
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
 
         [HttpPost]
         public async Task<IActionResult> CreateBook(CreateBookCommand command)

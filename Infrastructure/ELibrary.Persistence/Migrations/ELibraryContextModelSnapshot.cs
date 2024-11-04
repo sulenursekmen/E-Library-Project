@@ -178,9 +178,6 @@ namespace ELibrary.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BookId"));
 
-                    b.Property<int?>("ApplicationUserId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("AuthorId")
                         .HasColumnType("integer");
 
@@ -212,8 +209,6 @@ namespace ELibrary.Persistence.Migrations
 
                     b.HasKey("BookId");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.HasIndex("AuthorId");
 
                     b.HasIndex("CategoryId");
@@ -240,6 +235,32 @@ namespace ELibrary.Persistence.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("ELibrary.Domain.Entities.UserBook", b =>
+                {
+                    b.Property<int>("UserBookId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserBookId"));
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("UserBookId");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserBooks");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -347,10 +368,6 @@ namespace ELibrary.Persistence.Migrations
 
             modelBuilder.Entity("ELibrary.Domain.Entities.Book", b =>
                 {
-                    b.HasOne("ELibrary.Domain.Entities.ApplicationUser", null)
-                        .WithMany("Books")
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("ELibrary.Domain.Entities.Author", "Author")
                         .WithMany("Books")
                         .HasForeignKey("AuthorId")
@@ -366,6 +383,25 @@ namespace ELibrary.Persistence.Migrations
                     b.Navigation("Author");
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("ELibrary.Domain.Entities.UserBook", b =>
+                {
+                    b.HasOne("ELibrary.Domain.Entities.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ELibrary.Domain.Entities.ApplicationUser", "User")
+                        .WithMany("UserBooks")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -421,7 +457,7 @@ namespace ELibrary.Persistence.Migrations
 
             modelBuilder.Entity("ELibrary.Domain.Entities.ApplicationUser", b =>
                 {
-                    b.Navigation("Books");
+                    b.Navigation("UserBooks");
                 });
 
             modelBuilder.Entity("ELibrary.Domain.Entities.Author", b =>

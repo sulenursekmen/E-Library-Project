@@ -2,15 +2,12 @@
 using ELibrary.Application.Features.Mediator.Commands.AuthorCommands;
 using ELibrary.Application.Features.Mediator.Commands.BookCommands;
 using ELibrary.Application.Features.Mediator.Commands.CategoryCommands;
+using ELibrary.Application.Features.Mediator.Commands.UserBookCommands;
 using ELibrary.Application.Features.Mediator.Results.AuthorResults;
 using ELibrary.Application.Features.Mediator.Results.BookResults;
 using ELibrary.Application.Features.Mediator.Results.CategoryResults;
+using ELibrary.Application.Features.Mediator.Results.UserBookResults;
 using ELibrary.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ELibrary.Application.Mapping
 {
@@ -35,6 +32,12 @@ namespace ELibrary.Application.Mapping
             CreateMap<Book, UpdateBookCommand>().ReverseMap();
             CreateMap<Book, GetBookByIdQueryResult>();
             CreateMap<Book, GetBookQueryResult>();
+
+            //UserBook
+            CreateMap<UserBook, CreateUserBookCommand>().ReverseMap();
+            CreateMap<UserBook, UpdateUserBookCommand>().ReverseMap();
+            CreateMap<UserBook, GetUserBookQueryResult>().ReverseMap();
+            CreateMap<UserBook, GetUserBookByIdQueryResult>().ReverseMap();
         }
     }
 }

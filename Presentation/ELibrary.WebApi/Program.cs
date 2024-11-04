@@ -2,6 +2,7 @@ using ELibrary.Application.Features.CQRS.Handlers.ApplicationUserCommandHandlers
 using ELibrary.Application.Features.Mediator.Commands.AuthorCommands;
 using ELibrary.Application.Features.Mediator.Commands.BookCommands;
 using ELibrary.Application.Features.Mediator.Commands.CategoryCommands;
+using ELibrary.Application.Features.Mediator.Commands.UserBookCommands;
 using ELibrary.Application.Interfaces;
 using ELibrary.Application.Mapping;
 using ELibrary.Domain.Entities;
@@ -31,12 +32,16 @@ builder.Services.AddAutoMapper(typeof(GeneralMapping));
 
 //Author
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddTransient<IBookRepository, BookRepository>();
+
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddMediatR(typeof(CreateAuthorCommand).Assembly);
 
 builder.Services.AddMediatR(typeof(CreateBookCommand).Assembly);
 
 builder.Services.AddMediatR(typeof(CreateCategoryCommand).Assembly);
+
+builder.Services.AddMediatR(typeof(CreateUserBookCommand).Assembly);
 
 builder.Services.AddAutoMapper(typeof(Program));
 
