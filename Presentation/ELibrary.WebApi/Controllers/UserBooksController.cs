@@ -31,6 +31,14 @@ namespace ELibrary.WebApi.Controllers
             return Ok(values);
         }
 
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetUserBooksByUserId(int userId)
+        {
+            var userBooks = await _mediator.Send(new GetUserBookByUserIdQuery(userId));
+            return Ok(userBooks);
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> CreateUserBook(CreateUserBookCommand command)
         {

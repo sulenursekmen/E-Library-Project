@@ -17,7 +17,6 @@ namespace ELibrary.WebUI.Controllers
             _userManager = userManager;
         }
 
-
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -57,27 +56,24 @@ namespace ELibrary.WebUI.Controllers
                 var user = await _userManager.GetUserAsync(User);
                 if (user != null)
                 {
-                    // Kullanıcının bilgilerini güncelle
                     user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
                     user.Gender = model.Gender;
                     user.Bio = model.Bio;
-                    user.ProfilePictureUrl = model.ProfilePictureUrl; // Profil resmi URL'sini güncelle
+                    user.ProfilePictureUrl = model.ProfilePictureUrl; 
 
                     var result = await _userManager.UpdateAsync(user);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index"); // Güncellemeler başarılı ise profil sayfasına geri dön
+                        return RedirectToAction("Index"); 
                     }
 
                     foreach (var error in result.Errors)
                     {
-                        ModelState.AddModelError(string.Empty, error.Description); // Hataları ekle
+                        ModelState.AddModelError(string.Empty, error.Description); 
                     }
                 }
             }
-
-            // Hatalıysa güncellenen model ile tekrar göster
             ViewBag.GenderOptions = new SelectList(new[]
             {
             new { Value = "Male", Text = "Erkek" },

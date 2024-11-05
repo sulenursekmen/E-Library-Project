@@ -245,7 +245,13 @@ namespace ELibrary.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserBookId"));
 
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("BookId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CategoryId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("DateAdded")
@@ -256,7 +262,11 @@ namespace ELibrary.Persistence.Migrations
 
                     b.HasKey("UserBookId");
 
+                    b.HasIndex("AuthorId");
+
                     b.HasIndex("BookId");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("UserId");
 
@@ -387,9 +397,21 @@ namespace ELibrary.Persistence.Migrations
 
             modelBuilder.Entity("ELibrary.Domain.Entities.UserBook", b =>
                 {
+                    b.HasOne("ELibrary.Domain.Entities.Author", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ELibrary.Domain.Entities.Book", "Book")
                         .WithMany()
                         .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ELibrary.Domain.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -399,7 +421,11 @@ namespace ELibrary.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Author");
+
                     b.Navigation("Book");
+
+                    b.Navigation("Category");
 
                     b.Navigation("User");
                 });

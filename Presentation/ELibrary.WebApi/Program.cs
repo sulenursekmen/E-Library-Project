@@ -33,6 +33,7 @@ builder.Services.AddAutoMapper(typeof(GeneralMapping));
 //Author
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddTransient<IBookRepository, BookRepository>();
+builder.Services.AddTransient<IUserBookRepository, UserBookRepository>();
 
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddMediatR(typeof(CreateAuthorCommand).Assembly);

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ELibrary.Application.Features.Mediator.Results.UserBookResults.GetUserBookByUserIdQueryResult>
+@{
+    ViewData["Title"] = "MyLibrary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="custom-card mt-5">
+    <div class="container">
+        <h2 class="text-white">Kitaplığım</h2>
+        <div class="row">
+            @foreach (var book in Model)
+            {
+                <div class="col-md-3 mb-4">
+                    <div class="card bg-light h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">@book.Book.Title</h5>
+                            <p class="card-text">
+                                <strong>Yazar:</strong> @book.Book.Author.Name <br>
+                                <strong>Kategori:</strong> @book.Book.Category.CategoryName <br>
+                                <strong>Eklenme Tarihi:</strong> @book.DateAdded.ToShortDateString()
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <a class="btn btn-success mt-3" href="/UserLibrary/AddUserBookMyLibrary">Kitap Ekle</a>
+    </div>
+</div>

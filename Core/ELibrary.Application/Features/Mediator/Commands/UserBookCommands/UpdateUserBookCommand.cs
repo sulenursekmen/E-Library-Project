@@ -12,6 +12,8 @@ namespace ELibrary.Application.Features.Mediator.Commands.UserBookCommands
         public int UserBookId { get; set; }
         public int UserId { get; set; }
         public int BookId { get; set; }
+        public int AuthorId { get; set; }
+        public int CategoryId { get; set; }
         public DateTime DateAdded { get; set; }
     }
 }

@@ -2,7 +2,9 @@ using ELibrary.Domain.Entities;
 using ELibrary.Persistence.Context;
 using ELibrary.WebUI.Models;
 using ELibrary.WebUI.Services.EmailServices;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,7 @@ builder.Services.AddDbContext<ELibraryContext>();
 builder.Services.AddIdentity<ApplicationUser,ApplicationRole>().AddEntityFrameworkStores<ELibraryContext>().AddErrorDescriber<CustomIdentityValidator>();
 
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 
