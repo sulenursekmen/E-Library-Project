@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ELibrary.Persistence", "Inf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ELibrary.WebApi", "Presentation\ELibrary.WebApi\ELibrary.WebApi.csproj", "{2B9C9536-25DB-4F39-AADF-18FC5ECF5030}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELibrary.WebUI", "Presentation\ELibrary.WebUI\ELibrary.WebUI.csproj", "{10F4A612-2E19-4A61-9E97-499C80CEB629}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ELibrary.WebUI", "Presentation\ELibrary.WebUI\ELibrary.WebUI.csproj", "{10F4A612-2E19-4A61-9E97-499C80CEB629}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

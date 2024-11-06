@@ -18,6 +18,13 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddDbContext<ELibraryContext>(options =>
     options.UseNpgsql(connectionString));
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost",
+        builder => builder.WithOrigins("https://localhost:7201") // Frontend'in adresini buraya ekleyin
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
 
 //builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
 //    .AddEntityFrameworkStores<ELibraryContext>().AddDefaultTokenProviders();
@@ -65,7 +72,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseCors("AllowLocalhost");
 app.UseAuthentication();
 app.UseAuthorization();
 

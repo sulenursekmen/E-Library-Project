@@ -1,0 +1,108 @@
+﻿@model List<ELibrary.Application.Features.Mediator.Results.CategoryResults.GetCategoryQueryResult>
+
+@{
+    string[] colors = {
+        "#8B0000", "#006400", "#00008B", "#B8860B", "#800080", "#A52A2A", "#2F4F4F", "#8B4513", "#5F9EA0", "#4682B4",
+        "#2E8B57", "#191970", "#4B0082", "#6A5ACD", "#D2691E", "#B22222", "#800000", "#483D8B", "#008B8B", "#2C3E50"
+    };
+}
+
+<div class="custom-card mt-5 text-white">
+    <div class="container">
+        <div class="categories my-4">
+            <h3 class="mb-3">#Kategoriler</h3>
+            <ul class="list-group list-group-horizontal flex-wrap">
+                @foreach (var (category, index) in Model.Select((value, i) => (value, i)))
+                {
+                    var color = colors[index % colors.Length];
+                    <li class="list-group-item" style="background-color:@color" data-id="@category.CategoryId" data-name="@category.CategoryName">
+                        @category.CategoryName
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div id="booksContainer" class="mt-4" style="display: none;">
+        <div class="d-flex justify-content-between align-items-center">
+            <h3 id="booksHeading" class="mb-0"></h3>
+            <button id="hideBooksButton" class="btn btn-outline-light  mt-3">Gizle</button>
+        </div>
+        <ul id="booksList" class="list-group mt-3"></ul>
+    </div>
+
+
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const categoryItems = document.querySelectorAll(".list-group-item");
+        const booksContainer = document.getElementById("booksContainer");
+        const hideBooksButton = document.getElementById("hideBooksButton");
+
+        categoryItems.forEach(item => {
+            item.addEventListener("click", async function () {
+                const categoryId = this.getAttribute("data-id");
+                const categoryName = this.getAttribute("data-name");
+
+                const booksHeading = document.getElementById("booksHeading");
+                booksHeading.textContent = `#${categoryName} kategorisine ait kitaplar`;
+
+                booksContainer.style.display = "block"; 
+
+                try {
+                    const response = await fetch(`https://localhost:7220/api/Books/category/${categoryId}`);
+
+                    if (!response.ok) {
+                        throw new Error("Kitaplar alınamadı.");
+                    }
+
+                    const books = await response.json();
+
+                    const booksList = document.getElementById("booksList");
+                    booksList.innerHTML = "";
+
+                    if (books.length > 0) {
+                        books.forEach(book => {
+                            const li = document.createElement("li");
+                            li.classList.add("list-group-item");
+                            li.textContent = book.title;
+                            booksList.appendChild(li);
+                        });
+                    } else {
+                        booksList.innerHTML = "<li class='list-group-item'>Bu kategoride kitap yok.</li>";
+                    }
+                } catch (error) {
+                    console.error(error.message);
+                    const booksList = document.getElementById("booksList");
+                    booksList.innerHTML = "<li class='list-group-item text-danger'>Bu kategoriye ait kitap bulunamamaktadır.</li>";
+                }
+            });
+        });
+
+        hideBooksButton.addEventListener("click", function () {
+            booksContainer.style.display = "none";
+        });
+    });
+</script>
+
+<style>
+    .list-group-item {
+        margin: 5px;
+        cursor: pointer;
+        transition: text-decoration 0.3s ease;
+        font-weight: 600;
+        color: white;
+    }
+
+        .list-group-item:hover {
+            text-decoration: underline;
+        }
+
+    #booksList .list-group-item {
+        color: black; 
+        font-weight: normal;
+    }
+</style>
+
+

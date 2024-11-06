@@ -43,6 +43,18 @@ namespace ELibrary.WebApi.Controllers
             return Ok(result);
         }
 
+        [HttpGet("category/{categoryId}")]
+        public async Task<IActionResult> GetBooksByCategory(int categoryId)
+        {
+            var query = new GetBooksByCategoryIdQuery
+            {
+                CategoryId = categoryId,
+
+            };
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateBook(CreateBookCommand command)
         {
