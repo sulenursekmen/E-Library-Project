@@ -1,6 +1,7 @@
 ﻿using ELibrary.Application.Features.Mediator.Commands.UserBookCommands;
 using ELibrary.Application.Features.Mediator.Queries.UserBookQueries;
 using ELibrary.Application.Features.Mediator.Results.UserBookResults;
+using ELibrary.Application.Interfaces;
 using ELibrary.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -13,11 +14,13 @@ namespace ELibrary.WebUI.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly HttpClient _httpClient;
+        private readonly IBookRepository _bookRepository;
 
-        public UserLibraryController(UserManager<ApplicationUser> userManager, HttpClient httpClient)
+        public UserLibraryController(UserManager<ApplicationUser> userManager, HttpClient httpClient, IBookRepository bookRepository)
         {
             _userManager = userManager;
             _httpClient = httpClient;
+            _bookRepository = bookRepository;
         }
 
         [Authorize]
@@ -108,6 +111,28 @@ namespace ELibrary.WebUI.Controllers
                 return BadRequest($"API Error: {errorMessage}");
             }
         }
+
+        [HttpGet]
+        public IActionResult Filter()
+        {
+            return View();
+        }
+
+        // Kitapları Tarih Aralığına Göre Filtreleme Aksiyonu
+        [HttpPost]
+        public async Task<IActionResult> Filter(DateTime startDate, DateTime endDate)
+        {
+            if (startDate == default || endDate == default)
+            {
+                ModelState.AddModelError("", "Lütfen geçerli bir tarih aralığı girin.");
+                return View();
+            }
+
+            var books = await _bookRepository.GetBooksByPublishedDateAsync(startDate, endDate);
+            return View("Filter", books);
+        }
+
+
     }
 
 }

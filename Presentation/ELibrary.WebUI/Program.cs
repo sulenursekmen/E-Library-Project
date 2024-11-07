@@ -1,5 +1,7 @@
+using ELibrary.Application.Interfaces;
 using ELibrary.Domain.Entities;
 using ELibrary.Persistence.Context;
+using ELibrary.Persistence.Repositories;
 using ELibrary.WebUI.Models;
 using ELibrary.WebUI.Services.EmailServices;
 using MediatR;
@@ -24,7 +26,7 @@ builder.Services.AddIdentity<ApplicationUser,ApplicationRole>().AddEntityFramewo
 
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
-
+builder.Services.AddTransient<IBookRepository, BookRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

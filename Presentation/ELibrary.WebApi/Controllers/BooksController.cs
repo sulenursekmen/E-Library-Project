@@ -1,5 +1,6 @@
 ﻿using ELibrary.Application.Features.Mediator.Commands.BookCommands;
 using ELibrary.Application.Features.Mediator.Queries.BookQueries;
+using ELibrary.Application.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,12 @@ namespace ELibrary.WebApi.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IBookRepository _bookRepository;
 
-        public BooksController(IMediator mediator)
+        public BooksController(IMediator mediator, IBookRepository bookRepository)
         {
             _mediator = mediator;
+            _bookRepository = bookRepository;
         }
 
         [HttpGet]
@@ -54,6 +57,18 @@ namespace ELibrary.WebApi.Controllers
             var result = await _mediator.Send(query);
             return Ok(result);
         }
+
+        [HttpGet("byPublishedDate")]
+
+        public async Task<IActionResult> GetBooksByPublishedDate(DateTime startDate, DateTime endDate)
+        {
+            startDate = DateTime.SpecifyKind(startDate, DateTimeKind.Utc);
+            endDate = DateTime.SpecifyKind(endDate, DateTimeKind.Utc);
+
+            var books = await _bookRepository.GetBooksByPublishedDateAsync(startDate, endDate);
+            return Ok(books);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> CreateBook(CreateBookCommand command)

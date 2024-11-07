@@ -10,5 +10,6 @@ namespace ELibrary.Application.Interfaces
     public interface IBookRepository
     {
         Task<List<Book>> GetAllBookWithCategoryAndAuthorAsync();
+        Task<List<Book>> GetBooksByPublishedDateAsync(DateTime startDate, DateTime endDate);
     }
 }

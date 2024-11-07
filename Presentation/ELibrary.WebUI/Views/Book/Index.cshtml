@@ -1,0 +1,40 @@
+﻿@model List<ELibrary.Application.Features.Mediator.Results.BookResults.GetBooksByCategoryIdAndAuthorIdQueryResult>
+@{
+    ViewData["Title"] = "Books";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="custom-box-shadow">
+    <h3 class="text-white mb-4 mt-2 px-3 pt-3">#kitaplık</h3>
+    <div class="row my-2 mx-2">
+        @foreach (var book in Model)
+        {
+            <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4">
+                <div class="card custom-box-shadow  text-white h-100" style="background-color:#273d00">
+
+                    <div class="card-header text-center fw-bold p-3">
+                        @book.Title
+                    </div>
+                    <img src="@book.CoverImageUrl" class="card-img-top p-3" alt="Book Cover" style="height: 300px; width:auto; object-fit: contain;">
+
+
+                    <div class="card-body d-flex flex-column">
+                        <p class="card-text text-sm-start" style="max-height: 10.6em; ">
+                            @(book.Description.Length > 100 ? book.Description.Substring(0, 100) + "..." : book.Description)
+                        </p>
+                        <hr class="mt-1">
+                        <div class="mt-0">
+                            <p class="card-text">
+                                <small class="text-white-200">
+                                    Yazar: @book.AuthorName<br />
+                                    Kategori: @book.CategoryName<br />
+                                    Basım Tarihi: @book.PublishedDate.ToShortDateString()
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>

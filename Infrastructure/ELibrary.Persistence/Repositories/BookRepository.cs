@@ -26,5 +26,16 @@ namespace ELibrary.Persistence.Repositories
             .Include(b => b.Category) 
             .ToListAsync();
         }
+
+        public async Task<List<Book>> GetBooksByPublishedDateAsync(DateTime startDate, DateTime endDate)
+        {
+            startDate = DateTime.SpecifyKind(startDate, DateTimeKind.Utc);
+            endDate = DateTime.SpecifyKind(endDate, DateTimeKind.Utc);
+
+            return await _context.Books
+                .Where(b => b.PublishedDate >= startDate && b.PublishedDate <= endDate)
+                .ToListAsync();
+        }
+
     }
 }

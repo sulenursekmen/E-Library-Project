@@ -32,6 +32,7 @@ namespace ELibrary.Application.Mapping
             CreateMap<Book, UpdateBookCommand>().ReverseMap();
             CreateMap<Book, GetBookByIdQueryResult>();
             CreateMap<Book, GetBookQueryResult>();
+            CreateMap<Book, GetBooksByPublishedDateQueryResult>();
 
             //UserBook
             CreateMap<UserBook, CreateUserBookCommand>().ReverseMap();
