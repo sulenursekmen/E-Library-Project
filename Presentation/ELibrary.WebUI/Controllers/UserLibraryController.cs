@@ -15,12 +15,13 @@ namespace ELibrary.WebUI.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly HttpClient _httpClient;
         private readonly IBookRepository _bookRepository;
-
-        public UserLibraryController(UserManager<ApplicationUser> userManager, HttpClient httpClient, IBookRepository bookRepository)
+        private readonly IHttpClientFactory _httpClientFactory;
+        public UserLibraryController(UserManager<ApplicationUser> userManager, HttpClient httpClient, IBookRepository bookRepository, IHttpClientFactory httpClientFactory)
         {
             _userManager = userManager;
             _httpClient = httpClient;
             _bookRepository = bookRepository;
+            _httpClientFactory = httpClientFactory;
         }
 
         [Authorize]
@@ -111,6 +112,23 @@ namespace ELibrary.WebUI.Controllers
                 return BadRequest($"API Error: {errorMessage}");
             }
         }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> DeleteUserBook(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+
+            var responseMessage = await client.DeleteAsync("https://localhost:7220/api/UserBooks?id="+id);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("MyLibrary");
+            }
+
+            return View();
+        }
+
+      
 
         [HttpGet]
         public IActionResult Filter()

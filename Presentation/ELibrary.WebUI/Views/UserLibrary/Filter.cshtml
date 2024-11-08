@@ -3,51 +3,52 @@
     ViewData["Title"] = "Filter";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container text-white">
+    <h2>Kitapları Tarih Aralığına Göre Filtrele</h2>
 
-<h2>Kitapları Tarih Aralığına Göre Filtrele</h2>
+    <form asp-action="Filter" method="post">
+        <div>
+            <label for="startDate">Başlangıç Tarihi:</label>
+            <input type="date" id="startDate" name="startDate" required>
+        </div>
+        <div>
+            <label for="endDate">Bitiş Tarihi:</label>
+            <input type="date" id="endDate" name="endDate" required>
+        </div>
+        <button type="submit">Filtrele</button>
+    </form>
 
-<form asp-action="Filter" method="post">
-    <div>
-        <label for="startDate">Başlangıç Tarihi:</label>
-        <input type="date" id="startDate" name="startDate" required>
-    </div>
-    <div>
-        <label for="endDate">Bitiş Tarihi:</label>
-        <input type="date" id="endDate" name="endDate" required>
-    </div>
-    <button type="submit">Filtrele</button>
-</form>
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div style="color: red;">
+            Lütfen tüm alanları doldurun.
+        </div>
+    }
 
-@if (!ViewData.ModelState.IsValid)
-{
-    <div style="color: red;">
-        Lütfen tüm alanları doldurun.
-    </div>
-}
+    <h2>Filtrelenen Kitaplar</h2>
 
-<h2>Filtrelenen Kitaplar</h2>
-
-@if (Model == null || !Model.Any())
-{
-    <p>Belirtilen tarih aralığında herhangi bir kitap bulunamadı.</p>
-}
-else
-{
-    <table>
-        <thead>
-            <tr>
-                <th>Kitap Adı</th>
-                <th>Yayın Tarihi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var book in Model)
-            {
+    @if (Model == null || !Model.Any())
+    {
+        <p>Belirtilen tarih aralığında herhangi bir kitap bulunamadı.</p>
+    }
+    else
+    {
+        <table>
+            <thead>
                 <tr>
-                    <td>@book.Title</td>
-                    <td>@book.PublishedDate.ToString("yyyy-MM-dd")</td>
+                    <th>Kitap Adı</th>
+                    <th>Yayın Tarihi</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
+            </thead>
+            <tbody>
+                @foreach (var book in Model)
+                {
+                    <tr>
+                        <td>@book.Title</td>
+                        <td>@book.PublishedDate.ToString("yyyy-MM-dd")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
